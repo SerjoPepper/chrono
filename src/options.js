@@ -18,6 +18,11 @@ var JPCasualDateParser = require('./parsers/JP/JPCasualDateParser').Parser;
 
 var JPMergeDateRangeRefiner = require('./refiners/JP/JPMergeDateRangeRefiner').Refiner;
 
+var RUCasualDateParser = require('./parsers/RU/RUCasualDateParser').Parser;
+var RUMonthNameParser = require('./parsers/RU/RUMonthNameParser').Parser;
+var RUTimeDurationParser = require('./parsers/RU/RUTimeDurationParser').Parser;
+var RUTimeExpressionParser = require('./parsers/RU/RUTimeExpressionParser').Parser;
+var RUWeekdayParser = require('./parsers/RU/RUWeekdayParser').Parser;
 
 var OverlapRemovalRefiner = require('./refiners/OverlapRemovalRefiner').Refiner;
 var ExtractTimezoneOffsetRefiner = require('./refiners/ExtractTimezoneOffsetRefiner').Refiner;
@@ -29,7 +34,7 @@ function baseOption(strictMode) {
 
     return {
         parsers: [
-        
+
             // EN
             new ENISOFormatParser(strictMode),
             new ENDeadlineFormatParser(strictMode),
@@ -37,17 +42,24 @@ function baseOption(strictMode) {
             new ENMonthNameMiddleEndianParser(strictMode),
             new ENSlashDateFormatParser(strictMode),
             new ENSlashDateFormatStartWithYearParser(strictMode),
-            new ENTimeAgoFormatParser(strictMode),           
+            new ENTimeAgoFormatParser(strictMode),
             new ENTimeExpessionParser(strictMode),
 
             // JP
             new JPStandardParser(strictMode),
+
+            // RU
+            new RUCasualDateParser(strictMode),
+            new RUMonthNameParser(strictMode),
+            new RUTimeDurationParser(strictMode),
+            new RUTimeExpressionParser(strictMode),
+            new RUWeekdayParser(strictMode)
         ],
 
         refiners: [
             // Removing overlaping first
             new OverlapRemovalRefiner(),
-            
+
             // ETC
             new ENMergeDateTimeRefiner(),
             new ENMergeDateRangeRefiner(),
@@ -71,13 +83,13 @@ exports.strictOption = function () {
 exports.casualOption = function () {
 
     var options = baseOption(false);
-    
+
     // EN
     options.parsers.unshift(new ENCasualDateParser());
     options.parsers.unshift(new ENWeekdayParser());
 
     // JP
     options.parsers.unshift(new JPCasualDateParser());
-    
+
     return options;
 };
