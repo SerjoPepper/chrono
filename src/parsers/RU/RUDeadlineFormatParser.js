@@ -23,7 +23,7 @@ var INTERVALS = {
 
 var PATTERN = /(\s|^)через\s+([0-9\.]+)\s*(минут(?:а|ы)?|мин\.?|час(?:а|ов)?|ч\.?|день|дня|дней|секунд(?:а|ы)?)(?=\s|$|\.|,|;)/i;
 
-exports.Parser = function RUTimeDurationParser () {
+exports.Parser = function RUDeadlineFormatParser () {
 
   Parser.apply(this, arguments);
 
@@ -56,7 +56,7 @@ exports.Parser = function RUTimeDurationParser () {
     result.start.assign('minute', date.minute());
     result.start.assign('second', date.second());
 
-    result.tags['RUTimeDurationParser'] = true;
+    result.tags['RUDeadlineFormatParser'] = true;
     return result;
   };
 

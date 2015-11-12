@@ -20,7 +20,7 @@ var JPMergeDateRangeRefiner = require('./refiners/JP/JPMergeDateRangeRefiner').R
 
 var RUCasualDateParser = require('./parsers/RU/RUCasualDateParser').Parser;
 var RUMonthNameParser = require('./parsers/RU/RUMonthNameParser').Parser;
-var RUTimeDurationParser = require('./parsers/RU/RUTimeDurationParser').Parser;
+var RUDeadlineFormatParser = require('./parsers/RU/RUDeadlineFormatParser').Parser;
 var RUTimeExpressionParser = require('./parsers/RU/RUTimeExpressionParser').Parser;
 var RUWeekdayParser = require('./parsers/RU/RUWeekdayParser').Parser;
 
@@ -51,7 +51,7 @@ function baseOption(strictMode) {
             // RU
             new RUCasualDateParser(strictMode),
             new RUMonthNameParser(strictMode),
-            new RUTimeDurationParser(strictMode),
+            new RUDeadlineFormatParser(strictMode),
             new RUTimeExpressionParser(strictMode),
             new RUWeekdayParser(strictMode)
         ],
