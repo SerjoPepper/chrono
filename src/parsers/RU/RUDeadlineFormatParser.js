@@ -21,7 +21,7 @@ var INTERVALS = {
   'с': 'second'
 }
 
-var PATTERN = /(\s|^)через\s+([0-9\.]+)\s*(минут(?:а|ы)?|мин\.?|час(?:а|ов)?|ч\.?|день|дня|дней|секунд(?:а|ы)?|сек|с?)(?=\s|$|\.|,|;)/i;
+var PATTERN = /(\s|^)через\s+([0-9\.]+)?\s*(минут(?:а|ы|у)?|мин\.?|час(?:а|ов)?|ч\.?|день|дня|дней|секунд(?:а|ы|у)?|сек|с?)(?=\s|$|\.|,|;)/i;
 
 exports.Parser = function RUDeadlineFormatParser () {
 
@@ -37,7 +37,7 @@ exports.Parser = function RUDeadlineFormatParser () {
         ref: ref
     });
 
-    var duration = parseInt(match[2])
+    var duration = parseInt(match[2] || 1)
     var interval;
     for (k in INTERVALS) {
       if (match[3].indexOf(k) === 0) {
